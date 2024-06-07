@@ -3,12 +3,7 @@ import json
 # docs url
 # https://the-odds-api.com/liveapi/guides/v4/#parameters
 
-#api Key url => https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=american&apiKey=d63a10a144943fc29fe1f10d52677d07
-
-
-# api_key = 'd63a10a144943fc29fe1f10d52677d07'
-# api_key = 'd48840bfe45dca3e7726db70ae91e58b'
-api_key = '0b0d52ccfdc7216e7fbc15438a972a40'
+api_key = 'YOUR-APIKEY-HERE'
 
 getSportsEndpoint = 'https://api.the-odds-api.com/v4/sports/?apiKey=d63a10a144943fc29fe1f10d52677d07'
 getSportsResponse = requests.get(getSportsEndpoint)
@@ -30,8 +25,6 @@ bookList = [
             "BetUS",
             "SuperBook",
             ]
-
-# sportName = sport.get('key')
 
 def getSports(data):
     usableSports = []
@@ -57,12 +50,10 @@ def getOdds(odds):
 
 
 def findArbitrage(teamPrice, team, teamIndex, bookList, currentBook, tmpDict):
-    # if comparing against hometeam, teamIndex = 0 else teamIndex = 1
+    
     arbitrageodds = 0
     for targetBook in bookList:
-        if (targetBook not in bookList):
-        # if (targetBook == 'LowVig.ag' or targetBook == 'MyBookie.ag' or targetBook == "PointsBet (US)" or targetBook == 'BetOnline.ag' or targetBook == 'Bovada' or targetBook == 'Unibet' or targetBook == currentBook):
-            continue
+        if (targetBook not in bookList): continue
 
         else:
             comparePrice = tmpDict[targetBook][teamIndex]["price"]
@@ -81,13 +72,9 @@ def findArbitrage(teamPrice, team, teamIndex, bookList, currentBook, tmpDict):
                 print(arbitrageodds)
                 print('\n')
 
-
-
-
 sportsList = getSports(getSportsResponseData)
 
 for sportDict in sportsList:
-
     sport = sportDict.get('key')
     userInput = input(f'hit y to view {sport} results or any other key to continue: ')
 
@@ -100,7 +87,6 @@ for sportDict in sportsList:
     
         if response.status_code == 200:
 
-            
             response_content = response.text
 
             parsedResponse = json.loads(response_content)
@@ -142,18 +128,14 @@ for sportDict in sportsList:
             awayTeam = ""
             for i in range(len(games)):
                 print('==New Game==')
-                # printable = json.dumps(games[i], indent=2)
+                
                 tmpDict = games[i]
-                    # print(json.dumps(tmpDict, indent=2))
+                    
                 for targetBook in bookList:
                     try:
                         # print(tmpDict[targetBook][0])
                         currentBook = targetBook
-                        if (targetBook not in bookList):
-                        # if (targetBook == 'LowVig.ag' or targetBook == 'MyBookie.ag' or targetBook == "PointsBet (US)" or targetBook == 'BetOnline.ag' 
-                        #     or targetBook == 'Bovada' or targetBook == 'Unibet' or targetBook == 'BetUS' 
-                        #     or targetBook == 'WynnBET' or targetBook == 'DraftKings' or targetBook == 'SuperBook'):
-                            continue
+                        if (targetBook not in bookList): continue
                         else:
                             homeTeamPrice = tmpDict[targetBook][0]["price"]
                             awayTeamPrice = tmpDict[targetBook][1]["price"]
@@ -161,9 +143,7 @@ for sportDict in sportsList:
                             awayTeam = tmpDict[targetBook][1]["name"]
 
                             findArbitrage(homeTeamPrice, homeTeam, 1, bookList, currentBook, tmpDict)
-                            # 
-               
-        
+                            
                     except KeyError:
                         continue
                         
