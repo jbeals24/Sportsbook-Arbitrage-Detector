@@ -17,18 +17,18 @@ getSportsResponseData = getSportsResponse.json()
 bookList = [
             "DraftKings",
             "FanDuel",
-            # "WynnBET",
-            # "PointsBet (US)",
-            # "MyBookie.ag",
+            "WynnBET",
+            "PointsBet (US)",
+            "MyBookie.ag",
             "BetMGM",
-            # "LowVig.ag",
-            # "BetOnline.ag",
-            # "Unibet",
+            "LowVig.ag",
+            "BetOnline.ag",
+            "Unibet",
             "BetRivers",
             "Caesars",
-            # "Bovada",
-            # "BetUS",
-            # "SuperBook",
+            "Bovada",
+            "BetUS",
+            "SuperBook",
             ]
 
 # sportName = sport.get('key')
